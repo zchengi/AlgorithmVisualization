@@ -74,6 +74,7 @@ public class AlgorithmFrame extends JFrame {
                 if (i == data.currentIndex) {
                     AlgorithmVisHelper.setColor(graphics2D, AlgorithmVisHelper.LightBlue);
                 }
+
                 AlgorithmVisHelper.fillRectangle(
                         graphics2D, i * width, canvasHeight - data.get(i), width - 1, data.get(i));
             }

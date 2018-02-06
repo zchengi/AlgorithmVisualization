@@ -1,5 +1,7 @@
 package four.Insertion;
 
+import java.util.Arrays;
+
 /**
  * 插入排序数据
  *
@@ -8,15 +10,35 @@ package four.Insertion;
  */
 public class InsertionSortData {
 
+    public enum Type {
+        Default,
+        NearlyOrdered,
+    }
+
     private int[] numbers;
 
     public int orderedIndex = -1;
     public int currentIndex = -1;
 
     public InsertionSortData(int n, int randomBound) {
+        this(n, randomBound, Type.Default);
+    }
+
+    public InsertionSortData(int n, int randomBound, Type dataType) {
         numbers = new int[n];
         for (int i = 0; i < n; i++) {
             numbers[i] = (int) (Math.random() * randomBound) + 1;
+        }
+
+        // 生成近乎有序的数组
+        if (dataType == Type.NearlyOrdered) {
+            Arrays.sort(numbers);
+            int swapTime = (int) (0.02 * n);
+            for (int i = 0; i < swapTime; i++) {
+                int a = (int) (Math.random() * n);
+                int b = (int) (Math.random() * n);
+                swap(a, b);
+            }
         }
     }
 
