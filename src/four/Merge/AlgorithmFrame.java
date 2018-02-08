@@ -1,4 +1,6 @@
-package templates;
+package four.Merge;
+
+import templates.AlgorithmVisHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +16,7 @@ public class AlgorithmFrame extends JFrame {
     private int canvasWidth;
     private int canvasHeight;
 
-    private Object data;
+    private MergeSortData data;
 
     public AlgorithmFrame(String title, int canvasWidth, int canvasHeight) {
         super(title);
@@ -36,8 +38,7 @@ public class AlgorithmFrame extends JFrame {
         this(title, 800, 600);
     }
 
-    // TODO: 设置自己的数据
-    public void render(Object data) {
+    public void render(MergeSortData data) {
         this.data = data;
         repaint();
     }
@@ -62,7 +63,22 @@ public class AlgorithmFrame extends JFrame {
             graphics2D.addRenderingHints(hints);
 
             // 具体绘制
-            // TODO: 绘制自己的数据data
+            int width = canvasWidth / data.size();
+            for (int i = 0; i < data.size(); i++) {
+                if (i >= data.l && i <= data.r) {
+                    // 参与排序的元素
+                    AlgorithmVisHelper.setColor(graphics2D, AlgorithmVisHelper.Green);
+                } else {
+                    // 未参与排序的元素
+                    AlgorithmVisHelper.setColor(graphics2D, AlgorithmVisHelper.LightGrey);
+                }
+                if (i >= data.l && i <= data.mergeIndex) {
+                    // 排序完成的元素
+                    AlgorithmVisHelper.setColor(graphics2D, AlgorithmVisHelper.Red);
+                }
+                AlgorithmVisHelper.fillRectangle(
+                        graphics2D, i * width, canvasHeight - data.get(i), width - 1, data.get(i));
+            }
         }
 
         @Override
