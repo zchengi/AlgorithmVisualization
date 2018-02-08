@@ -6,18 +6,18 @@ import java.awt.*;
 import java.util.Arrays;
 
 /**
- * 控制层
+ * 自底向上的归并排序可视化
  *
  * @author cheng
  *         2018/1/28 14:30
  */
-public class AlgorithmVisualizer {
+public class MergeSortBUVisualizer {
 
     private static final int DELAY = 60;
     private MergeSortData data;
     private AlgorithmFrame frame;
 
-    public AlgorithmVisualizer(int sceneWidth, int sceneHeight, int n) {
+    public MergeSortBUVisualizer(int sceneWidth, int sceneHeight, int n) {
 
         // 初始化数据
         data = new MergeSortData(n, sceneWidth);
@@ -31,13 +31,16 @@ public class AlgorithmVisualizer {
     }
 
     /**
-     * 自顶向下排序的动画逻辑
+     * 自底向上排序的动画逻辑
      */
     private void run() {
-
         setData(-1, -1, -1);
-        mergeSort(0, data.size() - 1);
-        setData(0, data.size() - 1, data.size() - 1);
+        for (int sz = 1; sz < data.size(); sz *= 2) {
+            for (int i = 0; i < data.size(); i += sz + sz) {
+                merge(i, i + sz - 1, Math.min(i + sz + sz - 1, data.size() - 1));
+            }
+        }
+        setData(0, data.size() - 1, data.size());
     }
 
     private void mergeSort(int l, int r) {
