@@ -8,7 +8,7 @@ import static four.QuickThreeWays.ThreeWaysQuickSortData.Type;
 import static four.QuickThreeWays.ThreeWaysQuickSortData.Type.Default;
 
 /**
- * 控制器
+ *控制层
  *
  * @author cheng
  *         2018/1/28 14:30
