@@ -52,8 +52,8 @@ public class AlgorithmVisualizer {
     }
 
     public static void main(String[] args) {
-        int sceneWidth = 600;
-        int sceneHeight = 500;
+        int sceneWidth = 800;
+        int sceneHeight = 600;
 
         // TODO: 根据需要设置其他参数，初始化visualizer
 
