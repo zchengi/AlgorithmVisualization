@@ -5,7 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 
 /**
- * 控制器
+ * 控制层
  *
  * @author cheng
  *         2018/1/28 14:30

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * 视图层
+ *
  * @author cheng
  *         2018/1/27 19:57
  */
