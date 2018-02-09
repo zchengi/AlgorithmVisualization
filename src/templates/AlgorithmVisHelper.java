@@ -34,7 +34,7 @@ public class AlgorithmVisHelper {
     public static final Color DeepOrange = new Color(0xFF5722);
     public static final Color Brown = new Color(0x795548);
     public static final Color Grey = new Color(0x9E9E9E);
-    public static final Color LightGrey = new Color(0xbdbdbd);
+    public static final Color LightGrey = new Color(0xCDCDCD);
     public static final Color BlueGrey = new Color(0x607D8B);
     public static final Color Black = new Color(0x000000);
     public static final Color White = new Color(0xFFFFFF);
