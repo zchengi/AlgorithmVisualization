@@ -1,4 +1,4 @@
-package five;
+package five._05_DFS_Maze_Solver;
 
 import templates.AlgorithmVisHelper;
 

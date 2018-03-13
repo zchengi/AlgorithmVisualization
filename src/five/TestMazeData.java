@@ -1,5 +1,7 @@
 package five;
 
+import five._05_DFS_Maze_Solver.MazeData;
+
 /**
  * 迷宫测试类
  *
