@@ -18,7 +18,31 @@ public class MazeData {
     public static final char WALL = '#';
 
     private int N, M;
+
+    /**
+     * 迷宫数组
+     */
     private char[][] maze;
+
+    /**
+     * 迷宫入口坐标
+     */
+    private int entranceX, entranceY;
+
+    /**
+     * 迷宫出口坐标
+     */
+    private int exitX, exitY;
+
+    /**
+     * 迷宫是否被访问过
+     */
+    public boolean[][] visited;
+
+    /**
+     * 深度优先遍历的寻找路径
+     */
+    public boolean[][] path;
 
     public MazeData(String filename) {
 
@@ -41,8 +65,11 @@ public class MazeData {
             N = Integer.parseInt(nm[0]);
             M = Integer.parseInt(nm[1]);
 
-            // 读取后续的N行
             maze = new char[N][M];
+            visited = new boolean[N][M];
+            path = new boolean[N][M];
+
+            // 读取后续的N行
             for (int i = 0; i < N; i++) {
                 String line = scanner.nextLine();
                 // 每行保证有M个字符
@@ -53,6 +80,8 @@ public class MazeData {
                 // 对每一个迷宫元素赋值
                 for (int j = 0; j < M; j++) {
                     maze[i][j] = line.charAt(j);
+                    visited[i][j] = false;
+                    path[i][j] = false;
                 }
             }
         } catch (IOException e) {
@@ -62,6 +91,11 @@ public class MazeData {
                 scanner.close();
             }
         }
+
+        entranceX = 1;
+        entranceY = 0;
+        exitX = N - 2;
+        exitY = N - 1;
     }
 
     public void print() {
@@ -72,6 +106,10 @@ public class MazeData {
             }
             System.out.println();
         }
+    }
+
+    public boolean inArea(int x, int y) {
+        return x >= 0 && x < N && y >= 0 && y <= M;
     }
 
     public char getMaze(int i, int j) {
@@ -89,7 +127,19 @@ public class MazeData {
         return M;
     }
 
-    public boolean inArea(int x, int y) {
-        return x >= 0 && x < N && y >= 0 && y <= M;
+    public int getEntranceX() {
+        return entranceX;
+    }
+
+    public int getEntranceY() {
+        return entranceY;
+    }
+
+    public int getExitX() {
+        return exitX;
+    }
+
+    public int getExitY() {
+        return exitY;
     }
 }

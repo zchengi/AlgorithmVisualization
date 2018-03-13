@@ -12,12 +12,16 @@ import java.awt.*;
  */
 public class AlgorithmVisualizer {
 
-    private static int DELAY = 20;
+    private static int DELAY = 5;
     private static int blockSide = 6;
 
     private MazeData data;
-
     private AlgorithmFrame frame;
+
+    /**
+     * (x,y) 坐标偏移量：左移，下移，右移，上移
+     */
+    private static final int d[][] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
     public AlgorithmVisualizer(String mazeFile) {
 
@@ -37,14 +41,47 @@ public class AlgorithmVisualizer {
 
     private void run() {
 
-        setData();
+        setData(-1, -1);
 
+        go(data.getEntranceX(), data.getEntranceY());
+
+        setData(-1, -1);
     }
 
-    private void setData() {
+    private void setData(int x, int y) {
+
+        if (data.inArea(x, y)) {
+            data.path[x][y] = true;
+        }
 
         frame.render(data);
         AlgorithmVisHelper.pause(DELAY);
+    }
+
+    /**
+     * 深度优先递归走迷宫
+     */
+    private void go(int x, int y) {
+
+        if (!data.inArea(x, y)) {
+            throw new IllegalArgumentException("x,y are out of index in go() function!");
+        }
+
+        data.visited[x][y] = true;
+        setData(x, y);
+
+        if (x == data.getExitX() && y == data.getExitY()) {
+            return;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int newX = x + d[i][0];
+            int newY = y + d[i][1];
+            // (x,y)是否合法；是否是路，是否没有被访问过
+            if (data.inArea(newX, newY) && data.getMaze(newX, newY) == MazeData.ROAD && !data.visited[newX][newY]) {
+                go(newX, newY);
+            }
+        }
     }
 
     public static void main(String[] args) {

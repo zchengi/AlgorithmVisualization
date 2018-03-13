@@ -73,6 +73,11 @@ public class AlgorithmFrame extends JFrame {
                     } else {
                         AlgorithmVisHelper.setColor(graphics2D, AlgorithmVisHelper.White);
                     }
+
+                    if (data.path[i][j]) {
+                        AlgorithmVisHelper.setColor(graphics2D, AlgorithmVisHelper.Yellow);
+                    }
+
                     AlgorithmVisHelper.fillRectangle(graphics2D, j * w, i * h, w, h);
                 }
             }
