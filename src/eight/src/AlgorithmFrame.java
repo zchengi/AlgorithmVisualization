@@ -1,7 +1,11 @@
 package eight.src;
 
+import templates.AlgorithmVisHelper;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 视图层
@@ -42,8 +46,27 @@ public class AlgorithmFrame extends JFrame {
     }
 
     private class AlgorithmCanvas extends JPanel {
-        AlgorithmCanvas() {
+
+        private HashMap<Character, Color> colorMap;
+        private ArrayList<Color> colorList;
+
+        public AlgorithmCanvas() {
+            // 双缓存
             super(true);
+
+            colorMap = new HashMap<>();
+
+            colorList = new ArrayList<>();
+            colorList.add(AlgorithmVisHelper.Red);
+            colorList.add(AlgorithmVisHelper.Purple);
+            colorList.add(AlgorithmVisHelper.Blue);
+            colorList.add(AlgorithmVisHelper.Teal);
+            colorList.add(AlgorithmVisHelper.LightGreen);
+            colorList.add(AlgorithmVisHelper.Lime);
+            colorList.add(AlgorithmVisHelper.Amber);
+            colorList.add(AlgorithmVisHelper.DeepOrange);
+            colorList.add(AlgorithmVisHelper.Brown);
+            colorList.add(AlgorithmVisHelper.BlueGrey);
         }
 
         // 绘制组件 Graphics：绘制的上下文环境
@@ -61,6 +84,27 @@ public class AlgorithmFrame extends JFrame {
             graphics2D.addRenderingHints(hints);
 
             // 具体绘制
+            int w = canvasWidth / data.M();
+            int h = canvasHeight / data.N();
+
+            Board showBoard = data.getShowBoard();
+            for (int i = 0; i < showBoard.N(); i++) {
+                for (int j = 0; j < showBoard.M(); j++) {
+                    char c = showBoard.getData(i, j);
+                    if (c != Board.EMPTY) {
+
+                        if (!colorMap.containsKey(c)) {
+                            int sz = colorMap.size();
+                            colorMap.put(c, colorList.get(sz));
+                        }
+
+                        Color color = colorMap.get(c);
+                        AlgorithmVisHelper.setColor(graphics2D, color);
+                        AlgorithmVisHelper.fillRectangle(
+                                graphics2D, j * h + 2, i * w + 2, w - 4, h - 4);
+                    }
+                }
+            }
         }
 
         @Override

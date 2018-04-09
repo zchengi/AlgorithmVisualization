@@ -20,6 +20,8 @@ public class GameData {
     private Board startBoard;
     private int N, M;
 
+    private Board showBoard;
+
     public GameData(String filename) {
 
         if (filename == null) {
@@ -49,6 +51,8 @@ public class GameData {
             this.M = startBoard.M();
 
             startBoard.print();
+
+            showBoard = new Board(startBoard);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -68,5 +72,9 @@ public class GameData {
 
     public int M() {
         return M;
+    }
+
+    public Board getShowBoard() {
+        return showBoard;
     }
 }

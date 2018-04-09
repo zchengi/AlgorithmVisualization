@@ -6,6 +6,8 @@ package eight.src;
  */
 public class Board {
 
+    public static char EMPTY = '.';
+
     private int N, M;
     private char[][] data;
 
@@ -32,6 +34,19 @@ public class Board {
         }
     }
 
+    public Board(Board board) {
+        if (board == null) {
+            throw new IllegalArgumentException("Board cannot be null in Board constructor!");
+        }
+
+        this.N = board.N;
+        this.M = board.M;
+        this.data = new char[N][M];
+        for (int i = 0; i < N; i++) {
+            System.arraycopy(board.data[i], 0, this.data[i], 0, M);
+        }
+    }
+
     public boolean inArea(int x, int y) {
         return x >= 0 && x < N && y >= 0 && y < M;
     }
@@ -40,6 +55,14 @@ public class Board {
         for (int i = 0; i < N; i++) {
             System.out.println(String.valueOf(data[i]));
         }
+    }
+
+    public char getData(int x, int y) {
+        if (!inArea(x, y)) {
+            throw new IllegalArgumentException("x, y are out of index in getData!");
+        }
+
+        return data[x][y];
     }
 
     public int N() {
