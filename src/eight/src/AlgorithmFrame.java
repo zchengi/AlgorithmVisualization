@@ -102,6 +102,10 @@ public class AlgorithmFrame extends JFrame {
                         AlgorithmVisHelper.setColor(graphics2D, color);
                         AlgorithmVisHelper.fillRectangle(
                                 graphics2D, j * h + 2, i * w + 2, w - 4, h - 4);
+                        AlgorithmVisHelper.setColor(graphics2D, AlgorithmVisHelper.White);
+                        String text = String.format("(%d , %d)", i, j);
+                        AlgorithmVisHelper.drawText(graphics2D, text,
+                                j * h + h / 2, i * w + w / 2);
                     }
                 }
             }

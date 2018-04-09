@@ -37,6 +37,12 @@ public class AlgorithmVisualizer {
     private void run() {
 
         setData();
+
+        if (data.solve()) {
+            System.out.println("The game has a solution!");
+        } else {
+            System.out.println("The game doesn't have a solution!");
+        }
     }
 
     private void setData() {
@@ -46,7 +52,8 @@ public class AlgorithmVisualizer {
 
     public static void main(String[] args) {
 
-        String filename = "src/eight/level/boston_09.txt";
+        //  boston_09.txt boston_16.txt
+        String filename = "src/eight/level/boston_16.txt";
         AlgorithmVisualizer vis = new AlgorithmVisualizer(filename);
     }
 }

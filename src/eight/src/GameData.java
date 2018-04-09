@@ -1,5 +1,7 @@
 package eight.src;
 
+import com.sun.nio.sctp.IllegalReceiveException;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +17,7 @@ import java.util.Scanner;
  */
 public class GameData {
 
+    private static int[][] d = {{1, 0}, {0, -1}, {0, -1}};
 
     private int maxTurn;
     private Board startBoard;
@@ -60,6 +63,62 @@ public class GameData {
                 scanner.close();
             }
         }
+    }
+
+    /**
+     * Move The Box 求解
+     *
+     * @return
+     */
+    public boolean solve() {
+
+        if (maxTurn < 0) {
+            return false;
+        }
+
+        return solve(startBoard, maxTurn);
+    }
+
+
+    /**
+     * 通过盘面 board，使用 turn 次 move，解决 move the box 的问题
+     * 若可以成功解决，则返回true，否则返回false
+     */
+    private boolean solve(Board board, int turn) {
+
+        if (board == null || turn < 0) {
+            throw new IllegalReceiveException("Illegal arguments in solve function!");
+        }
+
+        if (turn == 0) {
+            return board.isWin();
+        }
+        if (board.isWin()) {
+            return true;
+        }
+
+        for (int x = 0; x < N; x++) {
+            for (int y = 0; y < M; y++) {
+                if (board.getData(x, y) != Board.EMPTY) {
+                    for (int i = 0; i < 3; i++) {
+                        int newX = x + d[i][0];
+                        int newY = y + d[i][1];
+                        if (inArea(newX, newY)) {
+                            String swapString = String.format
+                                    ("swap (%d, %d) and swap (%d, %d)", x, y, newX, newY);
+                            Board nextBoard = new Board(board, board, swapString);
+                            nextBoard.swap(x, y, newX, newY);
+                            nextBoard.run();
+                            if (solve(nextBoard, turn - 1)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public boolean inArea(int x, int y) {
