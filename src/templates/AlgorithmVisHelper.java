@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -136,5 +137,13 @@ public class AlgorithmVisHelper {
         int height = metrics.getDescent();
 
         graphics2D.drawString(text, centerX - width / 2, centerY + height);
+    }
+
+    /**
+     * 线段
+     */
+    public static void drawLine(Graphics2D graphics2D, double x1, double y1, double x2, double y2) {
+        Line2D line = new Line2D.Double(x1, y1, x2, y2);
+        graphics2D.draw(line);
     }
 }
