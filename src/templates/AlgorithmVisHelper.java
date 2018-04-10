@@ -3,6 +3,7 @@ package templates;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -70,6 +71,20 @@ public class AlgorithmVisHelper {
     public static void fillRectangle(Graphics2D graphics2D, int x, int y, int w, int h) {
         Rectangle2D rectangle = new Rectangle2D.Double(x, y, w, h);
         graphics2D.fill(rectangle);
+    }
+
+    /**
+     * 实心三角形
+     */
+    public static void fillTriangle(Graphics2D graphics2D, int x1, int y1, int x2, int y2, int x3, int y3) {
+
+        GeneralPath path = new GeneralPath();
+        path.moveTo(x1, y1);
+        path.lineTo(x2, y2);
+        path.lineTo(x3, y3);
+        path.closePath();
+
+        graphics2D.fill(path);
     }
 
     /**
